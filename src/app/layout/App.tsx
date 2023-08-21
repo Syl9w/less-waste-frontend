@@ -5,6 +5,7 @@ import { useStore } from '../stores/store'
 import { useEffect } from 'react'
 import LoadingComponent from './LoadingComponent'
 import { observer } from 'mobx-react-lite'
+import ModalContainer from '../modals/ModalContainer'
 
 function App() {
   const { userStore, commonStore } = useStore()
@@ -19,6 +20,7 @@ function App() {
   if (commonStore.appLoaded) {
     return (
       <Container fluid>
+        <ModalContainer/>
         <Row className='justify-content-md-center'>
           <NavBar />
           <Col xl={12}>

@@ -28,6 +28,7 @@ const Account = {
 
 const WasteReports = {
   list: () => request.get<WasteReport[]>('/wastereport'),
+  listUserReports: (username:string) => request.get<WasteReport[]>(`/wastereport/reports/${username}`),
   details: (id:string) => request.get<WasteReport>(`/wastereport/${id}`),
   create: (report:WasteReport) => request.post<void>('/wastereport', report),
 }
