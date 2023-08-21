@@ -1,7 +1,6 @@
-import { VictoryLabel, VictoryPie, VictoryTooltip, VictoryVoronoiContainer } from 'victory'
+import { VictoryPie } from 'victory'
 import { WasteReport } from '../../app/models/wasteReport'
 import { observer } from 'mobx-react-lite'
-import { useState } from 'react'
 
 interface Props {
   reports: WasteReport

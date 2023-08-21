@@ -20,6 +20,7 @@ export default class WasteReportStore {
       var wasteReports = await agent.WasteReports.list()
       runInAction(() => {
         wasteReports.forEach((wr) => {
+          wr.date = wr.date.split('T')[0]
           this.wasteReports.set(wr.id, wr)
         })
         this.loading = false
@@ -34,7 +35,7 @@ export default class WasteReportStore {
 
   get sortedReports() {
     return Array.from(this.wasteReports.values()).sort(
-      (f, s) => Date.parse(s.date) - Date.parse(f.date)
+      (f, s) => Date.parse(f.date) - Date.parse(s.date)
     )
   }
 
@@ -49,8 +50,8 @@ export default class WasteReportStore {
   }
 
   getReportsForUser(username: string): WasteReport[] | undefined {
-    return this.groupedReports.find(([user]) => user === username)?.[1];
-}
+    return this.groupedReports.find(([user]) => user === username)?.[1]
+  }
 
   createNewReport = async (report: WasteReport) => {
     this.submittingReport = true
@@ -59,6 +60,17 @@ export default class WasteReportStore {
     try {
       await agent.WasteReports.create(report)
       runInAction(() => {
+        const existingReport = Array.from(this.wasteReports.values()).find(
+          (existingReport) => existingReport.date === report.date.split('T')[0]
+        )
+        if (existingReport) {
+          report.id = existingReport.id
+          report.plastic += existingReport.plastic
+          report.paper += existingReport.paper
+          report.water += existingReport.water
+          report.fuel += existingReport.fuel
+          report.food += existingReport.food
+        }
         report.reporter = new Reporter(store.userStore.user!)
         this.wasteReports.set(report.id, report)
         this.submittingReport = false
