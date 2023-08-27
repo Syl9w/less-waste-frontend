@@ -25,7 +25,7 @@ export default function DashboardTimelineBar({ reports }: Props) {
       >
         <VictoryStack colorScale={['#116530', '#21B6A8', '#A3EBB1', '#18A558', '#ADC9C5']}>
           {data.map((entry, i) => (
-            <VictoryBar data={entry} key={i} labels={({ datum }) => `y: ${datum.y}`}
+            <VictoryBar data={entry} key={i} labels={({ datum }) => `${wasteTypes[i]}: ${datum.y}`}
             labelComponent={<VictoryTooltip  />}/>
           ))}
         </VictoryStack>

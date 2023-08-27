@@ -9,7 +9,7 @@ interface Props {
 export default observer(function DashboardChart({ reports }: Props) {
   return (
     <>
-      <div className='w-75'>
+      <div >
         <VictoryPie
           labels={({ datum }) => `${datum.x}`}
           padAngle={0.5}

@@ -8,18 +8,19 @@ export default observer(function NavBar() {
 
   return (
     <Navbar expand='lg' className='bg-body-tertiary'>
-      <Container >
+      <Container>
         <Navbar.Brand href='#home'>Less-waste</Navbar.Brand>
         <Navbar.Toggle aria-controls='basic-navbar-nav' />
         <Navbar.Collapse id='responsive-navbar-nav'>
-          <Nav className='me-auto'>
-            <Nav.Link as={NavLink} to='/dashboard'>
-              Dashboard
-            </Nav.Link>
-            <Nav.Link as={NavLink} to='/tips'>
-              Tips
-            </Nav.Link>
-          </Nav>
+            <Nav className='me-auto'>
+          {userStore.isLoggedIn && (
+              <><Nav.Link as={NavLink} to='/dashboard'>
+                Dashboard
+              </Nav.Link><Nav.Link as={NavLink} to='/tips'>
+                  Tips
+                </Nav.Link></>
+          )}
+            </Nav>
           <Nav>
             {!userStore.isLoggedIn && (
               <>
@@ -36,9 +37,7 @@ export default observer(function NavBar() {
                 <NavDropdown.Item as={NavLink} to='/profile'>
                   My Profile
                 </NavDropdown.Item>
-                <NavDropdown.Item onClick={userStore.logout}>
-                  Logout
-                </NavDropdown.Item>
+                <NavDropdown.Item onClick={userStore.logout}>Logout</NavDropdown.Item>
               </NavDropdown>
             )}
           </Nav>
