@@ -19,8 +19,11 @@ function App() {
 
   if (commonStore.appLoaded) {
     return (
-      <Container fluid>
-        <ModalContainer/>
+      <Container
+        fluid
+  
+      >
+        <ModalContainer />
         <Row className='justify-content-md-center'>
           <NavBar />
           <Col xl={12}>

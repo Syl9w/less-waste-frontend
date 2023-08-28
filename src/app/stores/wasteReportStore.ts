@@ -61,7 +61,7 @@ export default class WasteReportStore {
       await agent.WasteReports.create(report)
       runInAction(() => {
         const existingReport = Array.from(this.wasteReports.values()).find(
-          (existingReport) => existingReport.date === report.date.split('T')[0]
+          (existingReport) => existingReport.date.split('T')[0] === report.date.split('T')[0]
         )
         if (existingReport) {
           report.id = existingReport.id

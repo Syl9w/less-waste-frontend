@@ -1,0 +1,30 @@
+body {
+  color: #163a24;
+  font-family: 'Noto Sans', Arial, sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Recoleta-SemiBold', Georgia, serif;
+  font-weight: bold;
+}
+
+.navbar {
+  font-family: 'Recoleta-SemiBold', Georgia, serif;
+  background-color: #FBFAF6 !important;
+
+}
+
+.navbar-brand {
+  font-family: 'Recoleta-SemiBold', Georgia, serif;
+
+}
+
+.navbar-nav .nav-link.active,
+.nav-link {
+  font-family: 'Recoleta-SemiBold', Georgia, serif;
+}

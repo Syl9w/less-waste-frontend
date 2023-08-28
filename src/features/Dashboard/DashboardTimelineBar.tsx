@@ -15,7 +15,7 @@ export default function DashboardTimelineBar({ reports }: Props) {
       }
     })
   })
-  console.log(data)
+  
   return (
     <>
       <VictoryChart

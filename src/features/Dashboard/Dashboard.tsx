@@ -10,18 +10,18 @@ import DashboardTimelineBar from './DashboardTimelineBar'
 import DashboardGoal from './DashboardGoal'
 
 export default observer(function Dashboard() {
-  const { wasteReportStore, userStore, modalStore } = useStore()
+  const { wasteReportStore, userStore, modalStore, wasteGoalStore } = useStore()
 
   useEffect(() => {
+    wasteGoalStore.listGoals(userStore.user!.userName)
     wasteReportStore.listWasteReports()
-  }, [wasteReportStore])
+  }, [wasteReportStore, userStore, wasteGoalStore])
 
-  if (wasteReportStore.loading || wasteReportStore.sortedReports.length === 0)
-    return <LoadingComponent />
+  if (wasteReportStore.loading) return <LoadingComponent />
 
   const userReports = wasteReportStore.getReportsForUser(userStore.user!.userName)
 
-  if (wasteReportStore.loading || !userReports || userReports.length === 0)
+  if (wasteReportStore.loading )
     return <LoadingComponent />
 
   return (
@@ -32,13 +32,18 @@ export default observer(function Dashboard() {
             <div className='p-3'>
               <h4>Recent Report</h4>
               <Col s={6}>
-                <DashboardRecentInfo report={userReports[userReports.length - 1]} />
+                {userReports ? (
+                  <DashboardRecentInfo report={userReports[userReports.length - 1]} />
+                ) : (
+                  <h1>Hello {userStore.user?.displayName}</h1>
+                )}
               </Col>
             </div>
           </Row>
           <Row>
             <Col s={6}>
-              <DashboardChart reports={userReports[userReports.length - 1]} />
+            {userReports && (
+              <DashboardChart reports={userReports[userReports.length - 1]} />)}
             </Col>
           </Row>
           <Row className='w-75 mx-auto'>
@@ -51,15 +56,15 @@ export default observer(function Dashboard() {
             </Button>
           </Row>
         </div>
-        <Col>
-          <div className='shadow p-3 m-2 bg-body-tertiary rounded w-85'>
+        <Col s={12}>
+          <div className='shadow p-3 m-2 bg-body-tertiary rounded '>
             <div className='p-3'>
               <h4>Timeline</h4>
               <p className='alert alert-primary' role='alert'>
                 Here you can find timeline of your waste. You can always keep track the changes of
                 you consumption behaiviour and adjust it :){' '}
               </p>
-              <DashboardTimelineBar reports={userReports} />
+              <DashboardTimelineBar reports={userReports ? userReports : []} />
             </div>
           </div>
         </Col>
@@ -67,7 +72,7 @@ export default observer(function Dashboard() {
 
       <Row>
         <div className='shadow p-3 m-2 bg-body-tertiary rounded'>
-          <DashboardGoal />
+          <DashboardGoal goal={wasteGoalStore.wasteGoals[wasteGoalStore.activeGoal]} />
         </div>
       </Row>
     </Container>

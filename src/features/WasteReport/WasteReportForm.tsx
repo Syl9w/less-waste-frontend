@@ -6,10 +6,13 @@ import { Field, Form, Formik } from 'formik'
 import { Form as BootstrapForm, Button, Modal } from 'react-bootstrap'
 
 export default observer(function WasteReportForm() {
-  const { wasteReportStore, modalStore } = useStore()
+  const { wasteReportStore, wasteGoalStore, modalStore } = useStore()
 
   const handleSubmit = (report: WasteReport) => {
     wasteReportStore.createNewReport(report)
+    if (wasteGoalStore.wasteGoals.length !== 0 && wasteGoalStore.getCurrent() !== -1) {
+      wasteGoalStore.updateGoal(report)
+    }
     modalStore.closeModal()
   }
 
@@ -117,9 +120,11 @@ export default observer(function WasteReportForm() {
                 variant='outline-success'
                 type='submit'
                 className='mt-1'
-                disabled={wasteReportStore.submittingReport}
+                disabled={wasteReportStore.submittingReport && wasteGoalStore.submittingGoal}
               >
-                {wasteReportStore.submittingReport ? 'Submitting' : 'Submit'}
+                {wasteReportStore.submittingReport && wasteGoalStore.submittingGoal
+                  ? 'Submitting'
+                  : 'Submit'}
               </Button>
             </Modal.Footer>
           </Form>
