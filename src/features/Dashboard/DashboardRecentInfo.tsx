@@ -34,7 +34,7 @@ export default function DashboardRecentInfo({ report }: Props) {
                   backgroundColor: '#21B6A8',
                 }}
               />
-              Water: {report.water} l
+              Water: {report.water} g
             </div>
             <div className='col-4 d-flex align-items-center justify-content-center'>
               <span
@@ -72,7 +72,7 @@ export default function DashboardRecentInfo({ report }: Props) {
                   backgroundColor: '#ADC9C5',
                 }}
               />
-              Fuel: {report.fuel} l
+              Fuel: {report.fuel} g
             </div>
           </div>
         </div>

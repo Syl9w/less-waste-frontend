@@ -74,7 +74,7 @@ export default observer(function WasteReportForm() {
                 isInvalid={Boolean(errors.water)}
               />
               <BootstrapForm.Text muted>
-                Please enter amount of used water today in liters
+                Please enter amount of used water today in grams
               </BootstrapForm.Text>
               <BootstrapForm.Control.Feedback type='invalid'>
                 {errors.water}
@@ -106,7 +106,7 @@ export default observer(function WasteReportForm() {
                 isInvalid={Boolean(errors.fuel)}
               />
               <BootstrapForm.Text muted>
-                Please enter amount of used fuel today in liters
+                Please enter amount of used fuel today in grams
               </BootstrapForm.Text>
               <BootstrapForm.Control.Feedback type='invalid'>
                 {errors.fuel}
