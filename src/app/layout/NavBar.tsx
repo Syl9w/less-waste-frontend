@@ -9,18 +9,23 @@ export default observer(function NavBar() {
   return (
     <Navbar expand='lg' className='bg-body-tertiary'>
       <Container>
-        <Navbar.Brand href='#home'>Less-waste</Navbar.Brand>
+        <Navbar.Brand as={NavLink} to='/'>
+          Less-waste
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls='basic-navbar-nav' />
         <Navbar.Collapse id='responsive-navbar-nav'>
-            <Nav className='me-auto'>
-          {userStore.isLoggedIn && (
-              <><Nav.Link as={NavLink} to='/dashboard'>
-                Dashboard
-              </Nav.Link><Nav.Link as={NavLink} to='/tips'>
-                  Tips
-                </Nav.Link></>
-          )}
-            </Nav>
+          <Nav className='me-auto'>
+            {userStore.isLoggedIn && (
+              <>
+                <Nav.Link as={NavLink} to={`/dashboard/${userStore.user?.userName}`}>
+                  Dashboard
+                </Nav.Link>
+                <Nav.Link as={NavLink} to='/profiles'>
+                  Profiles
+                </Nav.Link>
+              </>
+            )}
+          </Nav>
           <Nav>
             {!userStore.isLoggedIn && (
               <>

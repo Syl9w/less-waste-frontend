@@ -3,6 +3,7 @@ import { User, UserFormValues } from '../models/user'
 import { store } from '../stores/store'
 import { WasteReport } from '../models/wasteReport'
 import { WasteGoal } from '../models/wasteGoal'
+import { Profile } from '../models/profile'
 
 axios.defaults.baseURL = 'http://localhost:5000/api'
 
@@ -42,10 +43,15 @@ const WasteGoals = {
   delete: (id: string) => request.del(`/wastegoal/${id}`),
 }
 
+const Profiles = {
+  list: () => request.get<Profile[]>('profile/')
+}
+
 const agent = {
   Account,
   WasteReports,
   WasteGoals,
+  Profiles,
 }
 
 export default agent

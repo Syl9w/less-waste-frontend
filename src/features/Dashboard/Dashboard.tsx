@@ -8,21 +8,22 @@ import DashboardRecentInfo from './DashboardRecentInfo'
 import WasteReportForm from '../WasteReport/WasteReportForm'
 import DashboardTimelineBar from './DashboardTimelineBar'
 import DashboardGoal from './DashboardGoal'
+import { useParams } from 'react-router'
 
 export default observer(function Dashboard() {
   const { wasteReportStore, userStore, modalStore, wasteGoalStore } = useStore()
+  const { username } = useParams()
 
   useEffect(() => {
     wasteGoalStore.listGoals(userStore.user!.userName)
-    wasteReportStore.listWasteReports()
-  }, [wasteReportStore, userStore, wasteGoalStore])
+    wasteReportStore.listWasteReports(username!)
+  }, [wasteReportStore, userStore, wasteGoalStore, username])
 
   if (wasteReportStore.loading) return <LoadingComponent />
 
-  const userReports = wasteReportStore.getReportsForUser(userStore.user!.userName)
+  const userReports = wasteReportStore.getReportsForUser(username!)
 
-  if (wasteReportStore.loading )
-    return <LoadingComponent />
+  if (wasteReportStore.loading) return <LoadingComponent />
 
   return (
     <Container className='mt-3'>
@@ -42,8 +43,7 @@ export default observer(function Dashboard() {
           </Row>
           <Row>
             <Col s={6}>
-            {userReports && (
-              <DashboardChart reports={userReports[userReports.length - 1]} />)}
+              {userReports && <DashboardChart reports={userReports[userReports.length - 1]} />}
             </Col>
           </Row>
           <Row className='w-75 mx-auto'>

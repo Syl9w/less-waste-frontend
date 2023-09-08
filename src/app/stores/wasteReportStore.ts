@@ -14,10 +14,10 @@ export default class WasteReportStore {
     makeAutoObservable(this)
   }
 
-  listWasteReports = async () => {
+  listWasteReports = async (username:string ) => {
     this.loading = true
     try {
-      var wasteReports = await agent.WasteReports.list()
+      var wasteReports = await agent.WasteReports.listUserReports(username)
       runInAction(() => {
         wasteReports.forEach((wr) => {
           wr.date = wr.date.split('T')[0]

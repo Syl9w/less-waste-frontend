@@ -4,6 +4,7 @@ import CommonStore from './commonStore'
 import WasteReportStore from './wasteReportStore'
 import ModalStore from './modalStore'
 import { WasteGoalStore } from './wasteGoalStore'
+import ProfileStore from './profileStore'
 
 interface Store {
   userStore: UserStore
@@ -11,6 +12,7 @@ interface Store {
   wasteReportStore: WasteReportStore
   modalStore: ModalStore
   wasteGoalStore: WasteGoalStore
+  profileStore: ProfileStore
 }
 
 export const store: Store = {
@@ -19,6 +21,7 @@ export const store: Store = {
   wasteReportStore: new WasteReportStore(),
   modalStore: new ModalStore(),
   wasteGoalStore: new WasteGoalStore(),
+  profileStore: new ProfileStore(),
 }
 
 export const StoreContext = createContext(store)
